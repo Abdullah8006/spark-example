@@ -45,11 +45,12 @@ public class WordCountTask {
 		/*
 		 * Performs a work count sequence of tasks and prints the output with a logger.
 		 */
-		context.textFile(inputFilePath).flatMap(text -> Arrays.asList(text.split("")).iterator())
+		context.textFile(inputFilePath).flatMap(text -> Arrays.asList(text.split(" ")).iterator())
 				.mapToPair(word -> new Tuple2<>(word, 1)).reduceByKey((a, b) -> a + b)
 				.foreach(result -> LOGGER.info(String.format("Word [%s] count [%d].", result._1(), result._2)));
 		LOGGER.info("//-------------------------------------//");
 		LOGGER.info("//-------------------------------------//");
 		LOGGER.info("//-------------------------------------//");
+		
 	}
 }
